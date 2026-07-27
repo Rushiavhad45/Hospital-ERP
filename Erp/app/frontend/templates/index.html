@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Palaskar Hospital — Orthopaedics · Ophthalmology · Physiotherapy | Vasai (W)</title>
+<meta name="description" content="Dr. Palaskar Hospital, Vasai (W) — a strong step &amp; a clear sight. Orthopaedic, eye and physiotherapy care since 2014. Book OPD appointments online.">
+<meta name="theme-color" content="#0C3D22">
+<link rel="icon" href="/static/img/favicon.png">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+<link rel="stylesheet" href="/static/css/app.css?v=3">
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <img src="/static/img/logo1.png" alt="Dr. Palaskar Hospital — A strong step &amp; a clear sight">
+  <div class="bar"><i></i></div>
+</div>
+
+<nav class="lp-nav">
+  <div class="in">
+    <img src="/static/img/logo1.png" alt="Dr. Palaskar Hospital">
+    <div class="links">
+      <a href="#doctors">Doctors</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#physio">Physiotherapy</a>
+      <a href="#book" class="btn sm orange">Book appointment</a>
+      <a href="/login" class="btn sm ghost">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="in">
+    <div>
+      <span class="tag">Since 2014 · Reg. No {{ info.hospital.registration_no }}</span>
+      <h1>A strong step &amp;<br>a <em>clear sight</em></h1>
+      <p class="muted" style="max-width:520px">
+        Orthopaedic, eye and physiotherapy care for Vasai–Virar — modern operation
+        theatres, digital diagnostics and a team that treats you like family.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#book">Book an OPD appointment</a>
+        <a class="btn ghost" href="#track">Track my booking</a>
+      </div>
+      <div class="stats">
+        <div><b>12+ yrs</b><span>Serving Vasai–Virar</span></div>
+        <div><b>2 OTs</b><span>Major &amp; minor theatres</span></div>
+        <div><b>24 × 7</b><span>Accident &amp; fracture care</span></div>
+        <div><b>Sun</b><span>Weekly holiday</span></div>
+      </div>
+    </div>
+    <div class="herocard" id="doctors">
+      <h3>Our consultants</h3>
+      {% for d in info.doctors %}
+      <div class="doc-row">
+        <span class="avatar">{{ d.name.replace('Dr. ','')[:1] }}</span>
+        <div>
+          <b>{{ d.name }}</b>
+          <div class="small muted">{{ d.qualification }}</div>
+          <div class="small">{{ d.title }}</div>
+          <div class="tiny muted">OPD: {{ d.opd_hours }} · Sunday closed</div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="divider"></div>
+      <div class="small muted">
+        ☎ Appointments: <b>{{ info.hospital.appointments_phone|join(' / ') }}</b><br>
+        ☎ Hospital: {{ info.hospital.telephone|join(' / ') }} · ✉ {{ info.hospital.email }}
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="book">
+  <h2>Book an OPD appointment</h2>
+  <p class="sub">Choose a doctor and a 30-minute slot for <b>today or tomorrow</b>.
+    No account needed — please arrive <b>30 minutes early</b> so the front desk can confirm your visit.</p>
+  <div class="book-wrap">
+    <div class="card">
+      <div class="stepline"><b>1</b> Doctor <b>2</b> Date &amp; slot <b>3</b> Your details</div>
+      <div id="book-widget"><div class="loader"></div></div>
+    </div>
+    <div class="card" id="track">
+      <h3>Already booked? Track it</h3>
+      <p class="muted small">Enter the booking code you received with your phone number.</p>
+      <form id="track-form">
+        <div class="field"><label>Booking code</label>
+          <input class="input" name="code" placeholder="APT-XXXXXX" required></div>
+        <div class="field"><label>Phone number</label>
+          <input class="input" name="phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required></div>
+        <button class="btn ghost">Find my appointment</button>
+      </form>
+      <div id="track-result" class="mt"></div>
+      <div class="divider"></div>
+      <h4>Visiting us</h4>
+      <p class="small muted">{{ info.hospital.address }} · Closed on {{ info.hospital.closed_on }}s.<br>
+        In an emergency, call {{ info.hospital.telephone[0] }} — our accident &amp; fracture care runs 24 × 7.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="treatments">
+  <h2>Treatments &amp; services</h2>
+  <p class="sub">Fourteen focused programmes across bone, joint, spine and eye care. Tap any card to see what's included.</p>
+  <div class="tgrid">
+    {% for t in info.treatments %}
+    <div class="tcard reveal" data-slug="{{ t.slug }}">
+      <div class="n">{{ '%02d'|format(loop.index) }}</div>
+      <h4>{{ t.name }}</h4>
+      <div class="small muted">{{ t['items']|length }} services · tap to view</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" id="expert">
+  <h2>Expert consultation</h2>
+  <p class="sub">Conditions we routinely evaluate and treat.</p>
+  <div class="grid g2">
+    {% for dept, items in info.expert_consultation.items() %}
+    <div class="card reveal">
+      <h3>{{ '🦴' if dept == 'ORTHOPAEDICS' else '👁' }} {{ dept.title() }}</h3>
+      <ul style="margin:8px 0 0;padding-left:20px">
+        {% for item in items %}<li class="small" style="margin:4px 0">{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" id="facilities">
+  <h2>Facilities</h2>
+  <p class="sub">{{ info.facilities|length }} reasons families across Vasai–Virar trust us.</p>
+  <div class="fgrid">
+    {% for f in info.facilities %}<div class="fac reveal">{{ f }}</div>{% endfor %}
+  </div>
+</section>
+
+<section class="section" id="physio">
+  <h2>Physiotherapy centre</h2>
+  <p class="sub">{{ info.physiotherapy.hours }}</p>
+  <div class="grid g3">
+    <div class="card reveal"><h3>🏋️ Exercises</h3>
+      {% for e in info.physiotherapy.exercises %}<span class="chip">{{ e }}</span>{% endfor %}</div>
+    <div class="card reveal"><h3>⚡ Modalities</h3>
+      {% for m in info.physiotherapy.modalities %}<span class="chip">{{ m }}</span>{% endfor %}
+      <div class="divider"></div><h4>Traction</h4>
+      {% for t in info.physiotherapy.traction %}<span class="chip">{{ t }}</span>{% endfor %}</div>
+    <div class="card reveal"><h3>📋 How it works</h3>
+      <p class="small muted">{{ info.physiotherapy.protocol }}</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="in">
+    <div>
+      <img src="/static/img/logo2-320.png" alt="" style="width:64px;border-radius:14px;background:#fff;padding:4px">
+      <h4 class="mt">{{ info.hospital.name }}</h4>
+      <p class="small">{{ info.hospital.tagline }}.<br>{{ info.hospital.address }}<br>
+        Reg. No: {{ info.hospital.registration_no }}</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p class="small">Appointments: {{ info.hospital.appointments_phone|join(' / ') }}<br>
+        Telephone: {{ info.hospital.telephone|join(' / ') }}<br>
+        Email: <a href="mailto:{{ info.hospital.email }}">{{ info.hospital.email }}</a></p>
+    </div>
+    <div>
+      <h4>Timings</h4>
+      <p class="small">{% for d in info.doctors %}{{ d.name.split(' ')[1] }} ({{ 'Ortho' if d.department == 'ORTHOPAEDICS' else 'Eye' }}): {{ d.opd_hours }}<br>{% endfor %}
+        Physiotherapy: 11 AM–1 PM &amp; 5–9 PM<br>Closed on {{ info.hospital.closed_on }}s</p>
+    </div>
+  </div>
+  <div class="base">© 2014–2026 {{ info.hospital.name }} · Staff &amp; patients <a href="/login">sign in here</a></div>
+</footer>
+
+<script src="/static/js/common.js?v=3" defer></script>
+<script src="/static/js/landing.js?v=3" defer></script>
+</body>
+</html>

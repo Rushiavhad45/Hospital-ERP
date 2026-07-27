@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign in — Dr. Palaskar Hospital</title>
+<meta name="theme-color" content="#0C3D22">
+<link rel="icon" href="/static/img/favicon.png">
+<link rel="stylesheet" href="/static/css/app.css?v=3">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <img src="/static/img/logo2-320.png" alt="Dr. Palaskar Hospital">
+    <h2>Welcome back</h2>
+    <p class="muted small">{{ info.hospital.name }} · {{ info.hospital.tagline }}</p>
+    <form id="login-form">
+      <div class="field"><label>Username</label>
+        <input class="input" name="username" autocomplete="username" required autofocus></div>
+      <div class="field"><label>Password</label>
+        <input class="input" type="password" name="password" autocomplete="current-password" required></div>
+      <button class="btn" style="width:100%;justify-content:center" id="login-btn">Sign in</button>
+    </form>
+    <div class="demo-creds">
+      <b>Demo accounts</b><br>
+      Super-admin: <code>sameer</code> or <code>lalan</code> / <code>Palaskar@2014</code><br>
+      Staff: <code>anita</code> · <code>priya</code> · <code>suresh</code> / <code>Staff@1234</code><br>
+      Patient: <code>ramesh</code> / <code>Patient@1234</code>
+    </div>
+    <p class="tiny muted mt"><a href="/">← Back to hospital website</a></p>
+  </div>
+</div>
+<script src="/static/js/common.js?v=3" defer></script>
+<script src="/static/js/login.js?v=3" defer></script>
+</body>
+</html>

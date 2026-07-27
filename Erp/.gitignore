@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+data/hospital.db*
+data/.secret_key
+data/uploads/*
+!data/uploads/.gitkeep
+.pytest_cache/
