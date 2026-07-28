@@ -23,6 +23,7 @@ python run.py
 
 Open **http://127.0.0.1:8000** — the database is created and seeded with rich
 demo data automatically on first start (file: `data/palaskar.db`).
+Live link- https://dr-palaskar-hospital-erp.fastapicloud.dev/
 
 | URL          | What it is                                   |
 |--------------|----------------------------------------------|
