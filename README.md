@@ -306,6 +306,3 @@ python -m pytest tests/          # 31 passed
 * Logos: `logo2.png` is the original artwork; `logo1.png` (the ⊕ mark used on
   the splash screen) is a programmatic reconstruction of the hospital's mark.
 
-Built with ❤️ for Dr. Palaskar Hospital — Sai Nagar, Vasai (W), Dist. Palghar
-401202 · ☎ 0250-2380099 / 2380888 · Appointments 9545081608 / 8087381866 ·
-palaskarhospital@gmail.com
